@@ -35,6 +35,7 @@ namespace Firebase.Authentication.JS
             AddMember(new NativeProperty<string, string>("email", GetEmail));
             AddMember(new NativeProperty<string, string>("photoUrl", GetPhotoUrl));
 
+
             // events
             _onSignInChanged = new NativeEvent("signedInStateChanged");
             _onError = new NativeEvent("onError");
@@ -49,6 +50,8 @@ namespace Firebase.Authentication.JS
 
             AddMember(new NativePromise<string, string>("delete", DeleteUser, null));
             AddMember(new NativePromise<string, string>("reauthenticate", ReAuthenticate, null));
+
+			AddMember(new NativePromise<string, string>("getToken", GetToken, null));
 
             AuthService.UserChanged += OnUser;
             AuthService.OnError += OnError;
@@ -98,6 +101,11 @@ namespace Firebase.Authentication.JS
 
 
         // functions
+		static Future<string> GetToken(object[] arg)
+		{
+			return new GetToken();
+		}
+		
         static Future<string> UpdateProfile(object[] args)
         {
             var displayName = (string)args[0];

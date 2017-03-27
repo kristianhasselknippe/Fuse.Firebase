@@ -45,7 +45,31 @@ namespace Firebase.Authentication
             NSURL* photoUrl = user.photoURL;
             return (photoUrl==NULL) ? NULL : photoUrl.absoluteString;
         @}
+
     }
+
+	
+	[Require("Source.Include", "Firebase/Firebase.h")]
+    [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]
+    extern(iOS)
+    internal class GetToken : Promise<string>
+	{
+		[Foreign(Language.ObjC)]
+		public GetToken()
+		@{
+			NSLog(@"We are in obj-c trying to get token");
+			FIRUser* user = [FIRAuth auth].currentUser;
+			[user getTokenWithCompletion: ^(NSString *_Nullable token, NSError *_Nullable error) {
+					NSLog(@"%@", token);
+				if (error) {
+					@{GetToken:Of(_this).Reject(string):Call(@"failed")};
+				} else {
+					@{GetToken:Of(_this).Resolve(string):Call(token)};
+				}
+			}];
+		@}
+		void Reject(string reason) { Reject(new Exception(reason)); }
+	}
 
     [Require("Source.Include", "Firebase/Firebase.h")]
     [Require("Source.Include", "FirebaseAuth/FirebaseAuth.h")]

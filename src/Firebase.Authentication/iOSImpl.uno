@@ -46,6 +46,14 @@ namespace Firebase.Authentication
             return (photoUrl==NULL) ? NULL : photoUrl.absoluteString;
         @}
 
+        [Foreign(Language.ObjC)]
+        internal static string GetUid(ObjC.Object obj)
+        @{
+			FIRUser* user = [FIRAuth auth].currentUser;
+			NSString* uid = user.uid;
+			return uid;
+        @}
+
     }
 
 	
@@ -62,7 +70,7 @@ namespace Firebase.Authentication
 			[user getTokenWithCompletion: ^(NSString *_Nullable token, NSError *_Nullable error) {
 					NSLog(@"%@", token);
 				if (error) {
-					@{GetToken:Of(_this).Reject(string):Call(@"failed")};
+					@{GetToken:Of(_this).Reject(string):Call(@"failed getting token for user")};
 				} else {
 					@{GetToken:Of(_this).Resolve(string):Call(token)};
 				}

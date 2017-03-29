@@ -257,6 +257,7 @@ namespace Firebase.Authentication
         internal static string GetName(object obj) { return null; }
         internal static string GetEmail(object obj) { return null; }
         internal static string GetPhotoUrl(object obj) { return null; }
+		internal static string GetUid(object obj) { return null; }
 		internal static void GetToken(object obj, Action<string> gotToken) { gotToken(null); }
     }
 

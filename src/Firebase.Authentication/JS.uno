@@ -34,6 +34,7 @@ namespace Firebase.Authentication.JS
             AddMember(new NativeProperty<string, string>("name", GetName));
             AddMember(new NativeProperty<string, string>("email", GetEmail));
             AddMember(new NativeProperty<string, string>("photoUrl", GetPhotoUrl));
+			AddMember(new NativeProperty<string, string>("uid", GetUid));
 
 
             // events
@@ -85,6 +86,14 @@ namespace Firebase.Authentication.JS
                 return User.GetPhotoUrl(User.GetCurrent());
             else
                 return "";
+		}
+
+		static string GetUid()
+		{
+			if (GetSignedIn())
+				return User.GetUid(User.GetCurrent());
+			else
+				return "";
 		}
 
         // events

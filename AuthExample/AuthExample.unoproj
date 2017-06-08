@@ -29,6 +29,7 @@
         "UriScheme": "fb@(Project.Facebook.AppID)"
     },
     "Includes": [
-        "*"
+        "*",
+		"GoogleService-Info.plist:ObjCSource:iOS"
     ]
 }

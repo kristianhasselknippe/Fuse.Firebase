@@ -30,6 +30,6 @@
     },
     "Includes": [
         "*",
-		"GoogleService-Info.plist:ObjCSource:iOS"
+        "GoogleService-Info.plist:ObjCSource:iOS"
     ]
 }
